@@ -15,6 +15,8 @@ public class Homework3 {
         printLineNumber();
 
         System.out.println(getGCD(15, 9));
+
+        System.out.println(getLCM(6, 8));
     }
 
     private static void geometryFormulas() {
@@ -58,5 +60,13 @@ public class Homework3 {
             return b;
         }
         return getGCD(b, a - b);
+    }
+
+    private static int getLCM(int a, int b) {
+        int LCM = a;
+        while (LCM % a != 0 || LCM % b != 0) {
+            LCM+= a;
+        }
+        return LCM;
     }
 }
