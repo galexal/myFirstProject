@@ -3,7 +3,7 @@ package lesson_8;
 import java.util.Objects;
 
 public class Oval extends Circle {
-    double radius2;
+    protected double radius2;
 
     @Override
     public boolean equals(Object o) {
