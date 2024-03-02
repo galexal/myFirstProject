@@ -2,10 +2,9 @@ package lesson_11.task_1.animals;
 
 import java.util.Random;
 
-public class Kotik {
+public class Kotik extends Carnivorous implements Run, Swim, Voice {
     private String name;
     private String voice;
-    private int satiety;
     private double weight;
     private final int METHODS = 5;
 
@@ -37,14 +36,6 @@ public class Kotik {
 
     public void setVoice(String voice) {
         this.voice = voice;
-    }
-
-    public int getSatiety() {
-        return satiety;
-    }
-
-    public void setSatiety(int satiety) {
-        this.satiety = satiety;
     }
 
     public double getWeight() {
@@ -150,5 +141,15 @@ public class Kotik {
             livingLog[i] = i + " - " + activity;
         }
         return livingLog;
+    }
+
+    @Override
+    public void run() {
+        System.out.println("Кот бежит");
+    }
+
+    @Override
+    public void swim() {
+        System.out.println("Кот плывет");
     }
 }
