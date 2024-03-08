@@ -10,7 +10,13 @@ import java.util.Scanner;
 
 public class Player implements IPlayer {
     List<ICard> cards = new ArrayList<>();
-    private String name;
+    private final String name;
+    private boolean isLose;
+
+    @Override
+    public boolean isLose() {
+        return isLose;
+    }
 
     public Player(String name) {
         this.name = name;
@@ -23,8 +29,13 @@ public class Player implements IPlayer {
 
     @Override
     public boolean isNeedAnotherCard() {
+        if (countValues() >= 21) {
+            if (countValues() > 21) {
+                isLose = true;
+            }
+            return false;
+        }
         System.out.println(name + ", нужна ли еще карта? Да/нет");
-        openCards();
         Scanner scanner = new Scanner(System.in);
         String answer = scanner.nextLine();
         return "да".equalsIgnoreCase(answer);
@@ -42,6 +53,13 @@ public class Player implements IPlayer {
         int sum = 0;
         for (ICard card : cards) {
             sum += card.getValue();
+        }
+        if (sum > 21) {
+            for (ICard card : cards) {
+                if (card.getValue() == 11) {
+                sum -= 10;
+                }
+            }
         }
         return sum;
     }
