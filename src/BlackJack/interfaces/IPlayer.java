@@ -12,4 +12,6 @@ public interface IPlayer {
 
     String getName();
 
+    boolean isLose();
+
 }

@@ -4,7 +4,7 @@ import BlackJack.interfaces.IDeck;
 
 public class Deck implements IDeck {
 
-    private Card[] cards = new Card[52];
+    private final Card[] cards = new Card[52];
 
     public Deck() {
         cards[0] = new Card("Двойка треф", 2);
@@ -75,10 +75,13 @@ public class Deck implements IDeck {
 
     @Override
     public Card getRandomCard() {
-        return cards[(int) (Math.random() * 52)];
-
-//        int index = (int) (Math.random() * 52);
-//        Card card = cards[index];
-//        return card;
+        int index = (int) (Math.random() * 52);
+        Card card = cards[index];
+        while (card == null) {
+            index = (int) (Math.random() * 52);
+            card = cards[index];
+        }
+        cards[index] = null;
+        return card;
     }
 }

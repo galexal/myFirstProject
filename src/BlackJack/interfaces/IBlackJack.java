@@ -6,8 +6,9 @@ public interface IBlackJack {
 
     void addCardsToPlayer();
 
-    void printWinners();
+    void addPlayersToGame();
 
-    void addPlayerToGame(IPlayer player);
+    void start();
 
+    void showGameInfo();
 }
