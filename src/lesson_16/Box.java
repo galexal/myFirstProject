@@ -14,7 +14,7 @@ public class Box <T extends Fruit> {
         return fruitList.size() > 0 ? fruitList.get(0).getWeight() * fruitList.size() : 0;
     }
 
-    public boolean compare(Box box) {
+    public boolean compare(Box<? extends Fruit> box) {
         return Double.compare(getWeight(), box.getWeight()) == 0;
     }
 
