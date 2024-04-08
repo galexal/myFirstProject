@@ -12,33 +12,23 @@ public class Main {
         studentList.add(new Student("Sidor", "Sidorov", 30, 4.1, 5));
 
         System.out.println("Студенты старше 25");
-        StudentUtils.filter(studentList, new Older25Filter());
+        StudentUtils.filter(studentList, student -> student.getAge() > 25);
         System.out.println();
 
         System.out.println("Студенты с именем на I");
-        StudentUtils.filter(studentList, new IFilter() {
-            @Override
-            public boolean test(Student student) {
-                return student.getName().startsWith("I");
-            }
-        });
+        StudentUtils.filter(studentList, student -> student.getName().startsWith("I"));
         System.out.println();
 
         System.out.println("Студенты со средним баллом меньше 4");
-        StudentUtils.filter(studentList, new AverageRateLessThan4Filter());
+        StudentUtils.filter(studentList, student -> student.getAverageRate() < 4);
         System.out.println();
 
         System.out.println("Студенты пятого курса");
-        StudentUtils.filter(studentList, new IFilter() {
-            @Override
-            public boolean test(Student student) {
-                return student.getCourse() == 5;
-            }
-        });
+        StudentUtils.filter(studentList, student -> student.getCourse() == 5);
         System.out.println();
 
         System.out.println("Студенты с именем Петр");
-        StudentUtils.filter(studentList, new NameIsPetrFilter());
+        StudentUtils.filter(studentList, student -> student.getName().equals("Petr"));
         System.out.println();
     }
 }
