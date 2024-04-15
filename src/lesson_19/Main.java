@@ -1,7 +1,10 @@
 package lesson_19;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
@@ -30,5 +33,34 @@ public class Main {
         System.out.println("Студенты с именем Петр");
         StudentUtils.filter(studentList, student -> student.getName().equals("Petr"));
         System.out.println();
+
+        List<Student> sortedStudentList = studentList.stream().sorted((student1, student2)->{
+            if (student1.getAge() == student2.getAge()) {
+                return student1.getName().compareTo(student2.getName());
+            }
+            return student1.getAge() - student2.getAge();
+        }).toList();
+
+        System.out.println("Студенты, отсортированные по возрасту и имени");
+        sortedStudentList.forEach(System.out::println);
+        System.out.println();
+
+        System.out.println("Карта студентов старше двадцати");
+        Map<String, Student> studentMap = studentList.stream().filter(student->student.getAge() > 20)
+                .collect(Collectors.toMap(Student::getName, student->student));
+        studentMap.forEach((key, value)->System.out.println(key + " : " + value));
+        System.out.println();
+
+        System.out.println("Второй студент по возрастанию возраста");
+        Student secondStudent = studentList.stream().sorted(Comparator.comparingInt(Student::getAge))
+                .skip(1)
+                .findFirst().orElse(null);
+        System.out.println(secondStudent);
+        System.out.println();
+
+        System.out.println("Средний балл всех студентов");
+        double avgSum = studentList.stream().map(Student::getAverageRate)
+                .reduce(0.0, Double::sum);
+        System.out.printf("%.1f\n", avgSum / studentList.size());
     }
 }
